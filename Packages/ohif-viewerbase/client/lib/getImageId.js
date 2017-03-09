@@ -18,7 +18,7 @@ export function getImageId(instance, frame) {
     }
 
     if (instance.wadouri) {
-        var imageId = 'dicomweb:' + OHIF.utils.absoluteUrl(instance.wadouri);
+        var imageId = 'dicomweb:' + instance.wadouri;
         if (frame !== undefined) {
             imageId += '&frame=' + frame;
         }
