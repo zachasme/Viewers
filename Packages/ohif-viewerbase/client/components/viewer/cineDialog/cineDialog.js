@@ -192,7 +192,7 @@ Template.cineDialog.onCreated(() => {
         };
 
         const cineDialogCoords = {
-            left: toolbarRect.offset.left + toolbarRect.width + 20,
+            left: toolbarRect.offset.left + toolbarRect.width,
             top: toolbarRect.offset.top + toolbarRect.height - cineDialogSize.height
         };
 
@@ -220,6 +220,7 @@ Template.cineDialog.onCreated(() => {
         }
 
         $cineDialog.css(cineDialogCoords);
+        $cineDialog.removeClass('hidden');
     };
 });
 
@@ -230,7 +231,11 @@ Template.cineDialog.onRendered(() => {
 
     // set dialog in optimal position and make sure it continues in a optimal position...
     // ... when the window has been resized
-    instance.setOptimalPosition(null, { top: singleRowLayout ? 47 : 26 });
+    // Using a setTimeout because it needs to wait for the toolbar to be properly
+    // rendered before getting its offset and size.
+    Meteor.setTimeout(() => {
+        instance.setOptimalPosition(null, { top: singleRowLayout ? 47 : 26 });
+    }, 300);
 
     // The jQuery method does not seem to be working...
     // ... $(window).resize(instance.setOptimalPosition)
