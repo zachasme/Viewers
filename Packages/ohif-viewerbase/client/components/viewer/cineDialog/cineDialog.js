@@ -38,27 +38,25 @@ Template.cineDialog.onCreated(() => {
     instance.updateFramerate = rate => {
         OHIF.viewer.cine.framesPerSecond = rate;
 
-        // Update playClip toolData for this imageId
-        const element = viewportUtils.getActiveViewportElement();
-        if (!element) {
-            return;
-        }
+        const elements = viewportUtils.getActiveViewportsElements();
 
-        let playClipData = cornerstoneTools.getToolState(element, 'playClip');
-        if (!playClipData || !playClipData.data || !playClipData.data.length) {
-            return;
-        }
+        elements.forEach(element => {
+            let playClipData = cornerstoneTools.getToolState(element, 'playClip');
+            if (!playClipData || !playClipData.data || !playClipData.data.length) {
+                return;
+            }
 
-        // A valid playClip data object is available.
-        playClipData = playClipData.data[0];
+            // A valid playClip data object is available.
+            playClipData = playClipData.data[0];
 
-        // If the movie is playing, stop/start to update the framerate
-        if (playClipData.intervalId !== void 0) {
-            cornerstoneTools.stopClip(element);
-            cornerstoneTools.playClip(element, OHIF.viewer.cine.framesPerSecond);
-        } else {
-            playClipData.framesPerSecond = OHIF.viewer.cine.framesPerSecond;
-        }
+            // If the movie is playing, stop/start to update the framerate
+            if (playClipData.intervalId !== void 0) {
+                cornerstoneTools.stopClip(element);
+                cornerstoneTools.playClip(element, OHIF.viewer.cine.framesPerSecond);
+            } else {
+                playClipData.framesPerSecond = OHIF.viewer.cine.framesPerSecond;
+            }
+        });
 
         Session.set('UpdateCINE', Random.id());
     };

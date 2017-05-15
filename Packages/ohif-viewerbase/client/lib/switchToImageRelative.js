@@ -10,6 +10,9 @@ import { viewportUtils } from './viewportUtils';
  * @param {number} [distanceFromCurrentIndex] The image index in the stack to switch to.
  */
 export function switchToImageRelative(distanceFromCurrentIndex) {
-    var element = viewportUtils.getActiveViewportElement();
-    cornerstoneTools.scroll(element, distanceFromCurrentIndex);
+    const elements = viewportUtils.getActiveViewportsElements();
+
+    elements.forEach(element => {
+        cornerstoneTools.scroll(element, distanceFromCurrentIndex);
+    });
 }

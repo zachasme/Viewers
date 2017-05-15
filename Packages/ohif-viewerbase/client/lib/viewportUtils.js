@@ -35,6 +35,19 @@ const getActiveViewportElement = () => {
 };
 
 /**
+ * Get the active viewports elements. It uses activeViewports Session Variable
+ * @return {DOMElement[]} an array containing DOMElements of all active viewports
+ */
+const getActiveViewportsElements = () => {
+    const viewportIndexes = Session.get('activeViewports') || [0];
+    const $viewports = $('.imageViewerViewport');
+
+    return _.map(viewportIndexes, viewportIndex => {
+        return $viewports.get(viewportIndex);
+    });
+};
+
+/**
  * Get a cornerstone enabledElement for the Active Viewport Element
  * @return {Object}  Cornerstone's enabledElement object for the active
  *                   viewport element or undefined if the element 
@@ -195,13 +208,16 @@ const toggleDialog = element => {
 const toggleCinePlay = () => {
     // Get the active viewport element
     const element = getActiveViewportElement();
+    const elements = viewportUtils.getActiveViewportsElements();
 
-    // Check if it's playing the clip to toggle it
-    if (isPlaying()) {
-        cornerstoneTools.stopClip(element);
-    } else {
-        cornerstoneTools.playClip(element);
-    }
+    elements.forEach(element => {
+        // Check if it's playing the clip to toggle it
+        if (isPlaying(element)) {
+            cornerstoneTools.stopClip(element);
+        } else {
+            cornerstoneTools.playClip(element);
+        }
+    });
 
     // Update the UpdateCINE session property
     Session.set('UpdateCINE', Random.id());
@@ -214,18 +230,20 @@ const toggleCineDialog = () => {
 };
 
 // Check if the clip is playing on the active viewport
-const isPlaying = () => {
+const isPlaying = element => {
     // Create a dependency on LayoutManagerUpdated and UpdateCINE session
     Session.get('UpdateCINE');
     Session.get('LayoutManagerUpdated');
 
-    // Get the viewport element and its current playClip tool state
-    const element = getActiveViewportElement();
+    // Get the active viewport element if no one has been passed as parameter
+    element = element || getActiveViewportElement();
+
     // Empty Elements throws cornerstore exception
     if (!element || !$(element).find('canvas').length) {
         return;
     }
 
+    // Get the playClip tool state for this element
     const toolState = cornerstoneTools.getToolState(element, 'playClip');
 
     // Stop here if the tool state is not defined yet
@@ -236,7 +254,7 @@ const isPlaying = () => {
     // Get the clip state
     const clipState = toolState.data[0];
     
-    if(clipState) {
+    if (clipState) {
         // Return true if the clip is playing
         return !_.isUndefined(clipState.intervalId);
     }
@@ -315,6 +333,7 @@ const viewportUtils = {
     getEnabledElementForActiveElement,
     getEnabledElement,
     getActiveViewportElement,
+    getActiveViewportsElements,
     zoomIn,
     zoomOut,
     zoomToFit,

@@ -10,6 +10,9 @@ import { viewportUtils } from './viewportUtils';
  * @param {number} [newImageIdIndex] The image index in the stack to switch to.
  */
 export function switchToImageByIndex(newImageIdIndex) {
-    var element = viewportUtils.getActiveViewportElement();
-    cornerstoneTools.scrollToIndex(element, newImageIdIndex);
+    const elements = viewportUtils.getActiveViewportsElements();
+
+    elements.forEach(element => {
+        cornerstoneTools.scrollToIndex(element, newImageIdIndex);
+    });
 }

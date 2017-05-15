@@ -596,11 +596,11 @@ Template.imageViewerViewport.onDestroyed(function() {
 Template.imageViewerViewport.events({
     'OHIFActivateViewport .imageViewerViewport'(event) {
         OHIF.log.info('imageViewerViewport OHIFActivateViewport');
-        setActiveViewport(event.currentTarget);
+        setActiveViewport(event.currentTarget, event);
     },
 
     'click .imageViewerViewport'(event) {
-        setActiveViewport(event.currentTarget);
+        setActiveViewport(event.currentTarget, event);
     },
 
     'CornerstoneToolsMouseDoubleClick .imageViewerViewport, CornerstoneToolsDoubleTap .imageViewerViewport'(event) {
