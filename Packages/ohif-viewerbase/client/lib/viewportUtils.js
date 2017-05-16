@@ -41,10 +41,11 @@ const getActiveViewportElement = () => {
 const getActiveViewportsElements = () => {
     const viewportIndexes = Session.get('activeViewports') || [0];
     const $viewports = $('.imageViewerViewport');
-
-    return _.map(viewportIndexes, viewportIndex => {
+    const activeViewports = _.map(viewportIndexes, viewportIndex => {
         return $viewports.get(viewportIndex);
     });
+
+    return _.compact(activeViewports);
 };
 
 /**
