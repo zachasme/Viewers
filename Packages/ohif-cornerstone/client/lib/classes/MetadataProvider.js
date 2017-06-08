@@ -1,3 +1,4 @@
+import * as cornerstoneMath from 'cornerstone-math';
 import { parsingUtils } from '../parsingUtils';
 
 const FUNCTION = 'function';

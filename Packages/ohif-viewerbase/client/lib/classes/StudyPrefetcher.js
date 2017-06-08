@@ -13,12 +13,12 @@ export class StudyPrefetcher {
         this.prefetchDisplaySetsTimeout = 300;
         this.lastActiveViewportElement = null;
 
-        $(cornerstone).on('CornerstoneImageCacheFull.StudyPrefetcher', _.bind(this.cacheFullHandler, this));
+        $(cornerstone.events).on('CornerstoneImageCacheFull.StudyPrefetcher', _.bind(this.cacheFullHandler, this));
     }
 
     destroy() {
         this.stopPrefetching();
-        $(cornerstone).off('CornerstoneImageCacheFull.StudyPrefetcher');
+        $(cornerstone.events).off('CornerstoneImageCacheFull.StudyPrefetcher');
     }
 
     static getInstance() {
