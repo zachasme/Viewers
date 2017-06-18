@@ -105,6 +105,25 @@ Template.toolbarSection.helpers({
         const buttonData = [];
 
         buttonData.push({
+            id: 'regionsThreshold',
+            title: 'Thresholding',
+            classes: 'imageViewerTool',
+            svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-zoom'
+        });
+        buttonData.push({
+            id: 'regionsGrow',
+            title: 'Region Grow',
+            classes: 'imageViewerTool',
+            svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-zoom'
+        });
+        buttonData.push({
+            id: 'regionsDraw',
+            title: 'Region Draw',
+            classes: 'imageViewerTool',
+            svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-zoom'
+        });
+
+        buttonData.push({
             id: 'zoom',
             title: 'Zoom',
             classes: 'imageViewerTool',

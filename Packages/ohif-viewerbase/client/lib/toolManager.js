@@ -55,6 +55,19 @@ let initialized = false;
  */
 export const toolManager = {
     init() {
+        console.log(cornerstoneTools, cornerstoneTools.regionsThreshold)
+        // CACALC BEGIN
+        toolManager.addTool('regionsThreshold', {
+          mouse: cornerstoneTools.regionsThreshold
+        });
+        toolManager.addTool('regionsGrow', {
+          mouse: cornerstoneTools.regionsGrow
+        });
+        toolManager.addTool('regionsDraw', {
+          mouse: cornerstoneTools.regionsDraw
+        });
+        // TODO: This is not a mouse tool, so it should not depend on a mouse event handler.
+        // CACAL END
         toolManager.addTool('wwwc', {
             mouse: cornerstoneTools.wwwc,
             touch: cornerstoneTools.wwwcTouchDrag

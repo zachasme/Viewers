@@ -107,6 +107,9 @@ Meteor.startup(function() {
 
     // Register the tool switching commands
     registerToolCommands({
+        regionsThreshold: 'Perform thresholding',
+        regionsDraw: 'Draw regions',
+        regionsGrow: 'Grow regions',
         wwwc: 'Window W/L',
         zoom: 'Zoom',
         angle: 'Angle Measurement',
