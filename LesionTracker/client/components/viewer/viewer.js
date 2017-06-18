@@ -110,12 +110,16 @@ Template.viewer.onCreated(() => {
 
     instance.data.studies.forEach(study => {
         const studyMetadata = new OHIF.metadata.StudyMetadata(study, study.studyInstanceUid);
-        const displaySets = OHIF.viewerbase.sortingManager.getDisplaySets(studyMetadata);
+        let displaySets = study.displaySets;
+
+        if(!study.displaySets) {
+            displaySets = OHIF.viewerbase.sortingManager.getDisplaySets(studyMetadata);
+            study.displaySets = displaySets;
+        }
 
         studyMetadata.setDisplaySets(displaySets);
 
         study.selected = true;
-        study.displaySets = displaySets;
         OHIF.viewer.Studies.insert(study);
         OHIF.viewer.StudyMetadataList.insert(studyMetadata);
     });

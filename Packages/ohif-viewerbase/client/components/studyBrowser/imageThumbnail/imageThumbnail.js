@@ -42,13 +42,20 @@ Template.imageThumbnail.onRendered(() => {
         // Disable cornerstone for thumbnail element and remove its canvas
         cornerstone.disable(element);
 
+        // Enable cornerstone for thumbnail element again creating a new canvas
+        cornerstone.enable(element);
+
         // Activate the loading state
         $loading.css('display', 'block');
 
         // Define a handler for success on image load
         const loadSuccess = image => {
-            // Enable cornerstone for thumbnail element again creating a new canvas
-            cornerstone.enable(element);
+            // Check to make sure the element is enabled.
+            try {
+                var enabledElement = cornerstone.getEnabledElement(element);
+            } catch(error) {
+                return;
+            }
 
             cornerstone.displayImage(element, image);
             $loading.css('display', 'none');
@@ -90,10 +97,7 @@ Template.imageThumbnail.onDestroyed(() => {
     const $parent = instance.$('.imageThumbnail');
     const $element = $parent.find('.imageThumbnailCanvas');
     const element = $element.get(0);
-
-    if (element) {
-        cornerstone.disable(element);
-    }
+    cornerstone.disable(element);
 });
 
 Template.imageThumbnail.helpers({
