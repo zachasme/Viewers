@@ -153,7 +153,7 @@ Template.toolbarSection.helpers({
             iconClasses: 'fa fa-undo'
         });
 
-        if (!OHIF.uiSettings.displayEchoUltrasoundWorkflow) {
+        /*if (!OHIF.uiSettings.displayEchoUltrasoundWorkflow) {
 
             buttonData.push({
                 id: 'previousDisplaySet',
@@ -192,7 +192,7 @@ Template.toolbarSection.helpers({
             title: 'Layout',
             iconClasses: 'fa fa-th-large',
             buttonTemplateName: 'layoutButton'
-        });
+        });*/
 
         buttonData.push({
             id: 'toggleMore',
@@ -208,7 +208,7 @@ Template.toolbarSection.helpers({
     hangingProtocolButtons() {
         let buttonData = [];
 
-        buttonData.push({
+        /*buttonData.push({
             id: 'previousPresentationGroup',
             title: 'Prev. Stage',
             iconClasses: 'fa fa-step-backward',
@@ -220,7 +220,7 @@ Template.toolbarSection.helpers({
             title: 'Next Stage',
             iconClasses: 'fa fa-step-forward',
             buttonTemplateName: 'nextPresentationGroupButton'
-        });
+        });*/
 
         return buttonData;
     }
