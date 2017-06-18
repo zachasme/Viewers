@@ -26,11 +26,21 @@ const makeDisplaySet = (series, instances) => {
         isMultiFrame: isMultiFrame(instance)
     });
 
+
     // Sort the images in this series
-    imageSet.sortBy((a, b) => {
-        // Sort by InstanceNumber (0020,0013)
-        return (parseInt(a.getRawValue('x00200013', 0)) || 0) - (parseInt(b.getRawValue('x00200013', 0)) || 0);
-    });
+    // CACALC BEGIN
+    if (imageSet.images[0]._study.studyInstanceUid == '1.3.3.7') { // Local files
+        imageSet.sortBy((a, b) => {
+            // Sort by url (e.g. dicomfile:10)
+            return (parseInt(a._instance.url.match(/\d+/)[0]) - parseInt(b._instance.url.match(/\d+/)[0]));
+        });
+    } else {
+        imageSet.sortBy((a, b) => {
+            // Sort by InstanceNumber (0020,0013)
+            return (parseInt(a.getRawValue('x00200013', 0)) || 0) - (parseInt(b.getRawValue('x00200013', 0)) || 0);
+        });
+    }
+    // CACALC END
 
     // Include the first image instance number (after sorted)
     imageSet.setAttribute('instanceNumber', imageSet.getImage(0).getRawValue('x00200013'));
