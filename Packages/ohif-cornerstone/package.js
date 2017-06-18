@@ -8,7 +8,7 @@ Npm.depends({
     'hammerjs': '2.0.8',
     'jquery-hammerjs': '2.0.0',
     'cornerstone-core': '0.11.0',
-    'cornerstone-tools': 'git://github.com/zachasme/cornerstoneTools.git#thresholding',
+    'cornerstone-tools': 'git://github.com/zachasme/cornerstoneTools#thresholding',
     'cornerstone-math': '0.1.6',
     'dicom-parser': '1.7.5',
     'cornerstone-wado-image-loader': '0.14.6'

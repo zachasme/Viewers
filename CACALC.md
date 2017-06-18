@@ -9,7 +9,7 @@ Need to override some code to not fail due to missing metadata for server. THIS 
 ### `Packages/ohif-cornerstone/package.js`
 Change cornerstone-tools npm dependency url to use our own fork.
 
-### `Packages\ohif-viewerbase\client\lib\toolManager.js` and `OHIFViewer\client\components\toolbarSection\toolbarSection.js`
+### `Packages\ohif-viewerbase\client\lib\toolManager.js` and `OHIFViewer\client\components\toolbarSection\toolbarSection.js` and `Packages\ohif-viewerbase\client\lib\hotkeyUtils.js`
 For adding custom tools
 
 ### `Packages\ohif-viewerbase\client\lib\createStacks.js`
