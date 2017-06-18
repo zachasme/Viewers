@@ -32,5 +32,5 @@ METEOR_PACKAGE_DIRS="../Packages" meteor --settings ../config/orthancDICOMWeb.js
 
 ## Build
 ```
-METEOR_PACKAGE_DIRS="../Packages" METEOR_SETTINGS=$(cat ../config/orthancDICOMWeb.json) meteor build package
+METEOR_PACKAGE_DIRS="../Packages" METEOR_SETTINGS=$(cat ../config/orthancDICOMWeb.json) meteor build --output buildoutput
 ```
