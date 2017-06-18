@@ -233,7 +233,7 @@ const loadDisplaySetIntoViewport = (data, templateData) => {
         $element.siblings('.imageViewerViewportOverlay').show();
 
         // Add stack state managers for the stack tool, CINE tool, and reference lines
-        cornerstoneTools.addStackStateManager(element, ['stack', 'playClip', 'referenceLines']);
+        cornerstoneTools.addStackStateManager(element, ['stack', 'playClip', 'referenceLines', 'regions', 'drawing']);
 
         // Enable orientation markers, if applicable
         updateOrientationMarkers(element);
