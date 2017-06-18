@@ -1,3 +1,9 @@
+# Merging from upstream
+```
+git remote add upstream https://github.com/OHIF/Viewers
+git merge upstream/master
+```
+
 # Develop
 
 ```
