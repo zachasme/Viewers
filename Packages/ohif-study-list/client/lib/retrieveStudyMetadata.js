@@ -28,6 +28,15 @@ OHIF.studylist.retrieveStudyMetadata = studyInstanceUid => {
 
     // Create a promise to handle the data retrieval
     const promise = new Promise((resolve, reject) => {
+
+         // CACALC BEGIN
+        const studylistStudy = OHIF.studylist.collections.Studies.findOne({
+           studyInstanceUid: studyInstanceUid
+        });
+        resolve(studylistStudy)
+        return
+        // CACALC END
+
         // If no study metadata is in the cache variable, we need to retrieve it from
         // the server with a call.
         Meteor.call('GetStudyMetadata', studyInstanceUid, function(error, study) {

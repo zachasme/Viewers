@@ -329,5 +329,32 @@ Template.studylistResult.events({
 
         instance.sortOption.set(sortOption);
         Session.set('sortOption', sortOption);
-    }
+    },
+
+    // CACALC BEGIN
+    'change #file'(event) {
+      var files = Array.from(event.target.files)
+      var imageIds = files
+        .sort((a, b) => parseInt(a.name) - parseInt(b.name))
+        .map(file => cornerstoneWADOImageLoader.wadouri.fileManager.add(file));
+      var studyInstanceUid = "1.3.3.7"
+      var study = {
+          "studyInstanceUid": studyInstanceUid,
+          "patientName": "Patient Name",
+          "seriesList": [{
+              "seriesInstanceUid": "1",
+              "seriesDescription": "T-1",
+              "instances": imageIds.map((id, i) => ({
+                  "sopInstanceUid": "1."+i,
+                  "columns": 256,
+                  "rows": 256,
+                  "url": id,
+              }))
+          }]
+      }
+      OHIF.studylist.collections.Studies.insert(study);
+      //OHIF.viewer.data.studyInstanceUids.push(study.studyInstanceUid);
+    },
+    // CACALC END
+
 });
