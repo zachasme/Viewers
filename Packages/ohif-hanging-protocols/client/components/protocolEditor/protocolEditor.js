@@ -7,6 +7,10 @@ import { $ } from 'meteor/jquery';
 import { OHIF } from 'meteor/ohif:core';
 import 'meteor/ohif:viewerbase';
 
+
+
+let lastScores = []
+
 Template.protocolEditor.helpers({
     config() {
       return cornerstoneTools.regionsThreshold.getConfiguration()
@@ -17,6 +21,15 @@ Template.protocolEditor.helpers({
         .map((color, i) => ({'color': color, 'derp': true, 'i': i+1}));
       console.log("YO",colors)
       return colors;
+    },
+    scores() {
+      const colors = cornerstoneTools.regionsThreshold.getConfiguration().regionColorsRGB;
+      const scores = lastScores.map((score, i) => ({
+        'score': score,
+        'color': colors[i],
+      }));
+      console.log(scores)
+      return scores;
     },
 });
 
@@ -45,8 +58,9 @@ Template.protocolEditor.events({
       RescaleSlope: 1,
       RescaleIntercept: 1024,
     };
-    cornerstoneTools.regionScores(attributes).then(scores => {
-      console.log("SCORES", scores)
+    cornerstoneTools.regionsScore(attributes).then(scores => {
+      lastScores = scores
+      console.log(lastScores)
     });
   },
 });

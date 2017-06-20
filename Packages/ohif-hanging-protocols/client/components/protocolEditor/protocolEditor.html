@@ -26,6 +26,12 @@
                       <th>Color</th>
                       <th>Score</th>
                     </tr>
+                    {{#each scores}}
+                      <tr>
+                        <td><span class="color" style="background-color:rgb({{color}})"></span></td>
+                        <td>{{ score }}</td>
+                      </tr>
+                    {{/each}}
                   </table>
               </div>
       </div>
