@@ -10,7 +10,12 @@
                   </p><p>
                       Layers below: <input id='layersBelow' type='number' value='{{config.layersBelow}}' />
                   </p><p>
-                      Color: <input id='toolRegionValue' type='number' value='{{config.toolRegionValue}}' />
+                      Color: <!--input id='toolRegionValue' type='number' value='{{config.toolRegionValue}}' / //-->
+                      {{#each colors}}
+                        <label><span class="color" style="background-color:rgb({{color}})"></span>
+                          <input name='toolRegionValue' type='radio' value="{{i}}" />
+                        </label>
+                      {{/each}}
                   </p>
               </div>
               <div>
