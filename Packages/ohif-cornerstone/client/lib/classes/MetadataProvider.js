@@ -201,6 +201,8 @@ export class MetadataProvider {
         imageMetadata.instance.frameOfReferenceUID = imageMetadata.instance.frameOfReferenceUID || this.getFromDataSet(image.data, 'string', 'x00200052');
         imageMetadata.instance.imageOrientationPatient = imageMetadata.instance.imageOrientationPatient || this.getFromDataSet(image.data, 'string', 'x00200037');
         imageMetadata.instance.imagePositionPatient = imageMetadata.instance.imagePositionPatient || this.getFromDataSet(image.data, 'string', 'x00200032');
+        imageMetadata.instance.RescaleSlope = imageMetadata.instance.RescaleSlope || this.getFromDataSet(image.data, 'string', 'x00281053');
+        imageMetadata.instance.RescaleIntercept = imageMetadata.instance.RescaleIntercept || this.getFromDataSet(image.data, 'string', 'x00281052');
         imageMetadata.instance.KPV = imageMetadata.instance.KPV || this.getFromDataSet(image.data, 'string', 'x00180060');
         imageMetadata.instance.sliceThickness = imageMetadata.instance.sliceThickness || this.getFromDataSet(image.data, 'string', 'x00180050');
         imageMetadata.instance.sliceLocation = imageMetadata.instance.sliceLocation || this.getFromDataSet(image.data, 'string', 'x00201041');

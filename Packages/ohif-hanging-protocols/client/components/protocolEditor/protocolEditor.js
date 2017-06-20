@@ -66,7 +66,7 @@ Template.protocolEditor.events({
     });
 
     const data = instance._data;
-
+    console.log(data);
     const attributes = {
       SliceThickness: data.sliceThickness,
       PixelSpacing: data.pixelSpacing.split('\\').map(parseFloat),
