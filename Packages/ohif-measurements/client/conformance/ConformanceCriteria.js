@@ -176,6 +176,10 @@ class ConformanceCriteria {
         });
     }
 
+    static setEvaluationDefinitions(evaluationKey, evaluationDefinitions) {
+        evaluations[evaluationKey] = evaluationDefinitions;
+    }
+
 }
 
 OHIF.measurements.ConformanceCriteria = ConformanceCriteria;
