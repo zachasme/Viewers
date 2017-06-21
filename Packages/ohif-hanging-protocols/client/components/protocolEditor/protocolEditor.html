@@ -13,13 +13,13 @@
               </div>
                                 <hr/>
               <div>
-                  <h2>Calc-scores</h2> <button id="calculate">calculate</button>
+                  <h2>Calc-scores <button id="calculate">calculate</button></h2>
                   <table>
                     {{#each colors}}
                       <tr>
                         <td>
                           <label>
-                            <input id="color{{i}}" name='toolRegionValue' type='radio' value="{{i}}" />
+                            <input id="color{{i}}" name='toolRegionValue' type='radio' value="{{i}}" checked={{checked}} />
                           </label>
                         </td>
                         <td><label for="color{{i}}"><span class="color" style="background-color:rgb({{color}})"></span></label></td>

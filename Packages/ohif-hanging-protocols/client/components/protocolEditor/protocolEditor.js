@@ -24,9 +24,9 @@ Template.protocolEditor.helpers({
     colors() {
       const instance = Template.instance();
       const lastScores = instance.state.get('scores');
-      const colors = cornerstoneTools
-        .regionsThreshold.getConfiguration().regionColorsRGB
-        .map((color, i) => ({
+      const config = cornerstoneTools.regionsThreshold.getConfiguration();
+      const colors = config.regionColorsRGB.map((color, i) => ({
+          'checked': config.toolRegionValue == i+1,
           'color': color,
           'derp': true,
           'i': i+1,
@@ -34,17 +34,6 @@ Template.protocolEditor.helpers({
         }));
       console.log("YO",colors)
       return colors;
-    },
-    scores() {
-      const instance = Template.instance();
-      const lastScores = instance.state.get('scores');
-      const colors = cornerstoneTools.regionsThreshold.getConfiguration().regionColorsRGB.slice(1);
-      const scores = lastScores.map((score, i) => ({
-        'score': Math.round(score),
-        'color': colors[i],
-      }));
-      console.log(scores)
-      return scores;
     },
 });
 
