@@ -102,25 +102,37 @@ Template.toolbarSection.helpers({
             iconClasses: 'fa fa-trash'
         });
 
-        const buttonData = [];
+        const thresholdingTools = [];
 
-        buttonData.push({
-            id: 'regionsThreshold',
-            title: 'Thresholding',
-            classes: 'imageViewerTool',
-            svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-zoom'
-        });
-        buttonData.push({
+        thresholdingTools.push({
             id: 'regionsGrow',
             title: 'Region Grow',
             classes: 'imageViewerTool',
             svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-zoom'
         });
-        buttonData.push({
+
+        thresholdingTools.push({
+            id: 'regionsThreshold',
+            title: 'Thresholding',
+            classes: 'imageViewerTool',
+            svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-zoom',
+        });
+
+        thresholdingTools.push({
             id: 'regionsDraw',
             title: 'Region Draw',
             classes: 'imageViewerTool',
             svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-zoom'
+        });
+
+        const buttonData = [];
+
+        buttonData.push({
+            id: 'thresholdingTools',
+            title: 'Thresholding',
+            classes: 'rp-x-1 rm-l-3',
+            svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-zoom',
+            subTools: thresholdingTools
         });
 
         buttonData.push({
