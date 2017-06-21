@@ -31,7 +31,7 @@ Template.protocolEditor.helpers({
       const lastScores = instance.state.get('scores');
       const colors = cornerstoneTools.regionsThreshold.getConfiguration().regionColorsRGBs.slice(1);
       const scores = lastScores.map((score, i) => ({
-        'score': score,
+        'score': Math.round(score),
         'color': colors[i],
       }));
       console.log(scores)
