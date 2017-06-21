@@ -8,8 +8,12 @@ import { OHIF } from 'meteor/ohif:core';
 import { Viewerbase } from 'meteor/ohif:viewerbase';
 
 
-
-let lastScores = []
+Template.protocolEditor.onCreated(function(){
+  this.state = new ReactiveDict();
+  this.state.setDefault({
+    scores: [],
+  })
+})
 
 Template.protocolEditor.helpers({
     config() {
@@ -23,6 +27,8 @@ Template.protocolEditor.helpers({
       return colors;
     },
     scores() {
+      const instance = Template.instance();
+      const lastScores = instance.state.get('scores');
       const colors = cornerstoneTools.regionsThreshold.getConfiguration().regionColorsRGB;
       const scores = lastScores.map((score, i) => ({
         'score': score,
@@ -79,6 +85,7 @@ Template.protocolEditor.events({
     cornerstoneTools.regionsScore(attributes).then(scores => {
       lastScores = scores
       console.log(lastScores)
+      context.state.set('scores', scores);
     });
   },
 });
