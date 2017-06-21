@@ -11,7 +11,9 @@ import { Viewerbase } from 'meteor/ohif:viewerbase';
 Template.protocolEditor.onCreated(function(){
   this.state = new ReactiveDict();
   this.state.setDefault({
-    scores: [],
+    scores: cornerstoneTools.regionsThreshold.getConfiguration().regionColorsRGB.slice(1).map(
+      () => (0)
+    ),
   })
 })
 
@@ -20,9 +22,16 @@ Template.protocolEditor.helpers({
       return cornerstoneTools.regionsThreshold.getConfiguration()
     },
     colors() {
+      const instance = Template.instance();
+      const lastScores = instance.state.get('scores');
       const colors = cornerstoneTools
         .regionsThreshold.getConfiguration().regionColorsRGB
-        .map((color, i) => ({'color': color, 'derp': true, 'i': i+1}));
+        .map((color, i) => ({
+          'color': color,
+          'derp': true,
+          'i': i+1,
+          'score': i === 0 ? 0 : Math.round(lastScores[i-1]),
+        }));
       console.log("YO",colors)
       return colors;
     },

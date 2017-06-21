@@ -9,27 +9,21 @@
                       Layers above: <input id='layersAbove' type='number' value='{{config.layersAbove}}' />
                   </p><p>
                       Layers below: <input id='layersBelow' type='number' value='{{config.layersBelow}}' />
-                  </p><p>
-                      Color: <!--input id='toolRegionValue' type='number' value='{{config.toolRegionValue}}' / //-->
-                      {{#each colors}}
-                        <label><span class="color" style="background-color:rgb({{color}})"></span>
-                          <input name='toolRegionValue' type='radio' value="{{i}}" />
-                        </label>
-                      {{/each}}
                   </p>
               </div>
+                                <hr/>
               <div>
                   <h2>Calc-scores</h2> <button id="calculate">calculate</button>
-                  <hr/>
                   <table>
-                    <tr>
-                      <th>Color</th>
-                      <th>Score</th>
-                    </tr>
-                    {{#each scores}}
+                    {{#each colors}}
                       <tr>
-                        <td><span class="color" style="background-color:rgb({{color}})"></span></td>
-                        <td>{{ score }}</td>
+                        <td>
+                          <label>
+                            <input id="color{{i}}" name='toolRegionValue' type='radio' value="{{i}}" />
+                          </label>
+                        </td>
+                        <td><label for="color{{i}}"><span class="color" style="background-color:rgb({{color}})"></span></label></td>
+                        <td><p><label for="color{{i}}">{{ score }}</label></p></td>
                       </tr>
                     {{/each}}
                   </table>
