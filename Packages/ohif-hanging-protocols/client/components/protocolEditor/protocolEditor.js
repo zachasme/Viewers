@@ -29,7 +29,7 @@ Template.protocolEditor.helpers({
     scores() {
       const instance = Template.instance();
       const lastScores = instance.state.get('scores');
-      const colors = cornerstoneTools.regionsThreshold.getConfiguration().regionColorsRGB;
+      const colors = cornerstoneTools.regionsThreshold.getConfiguration().regionColorsRGBs.slice(1);
       const scores = lastScores.map((score, i) => ({
         'score': score,
         'color': colors[i],
@@ -83,8 +83,6 @@ Template.protocolEditor.events({
     console.log("scoring using these attributes: ", attributes)
 
     cornerstoneTools.regionsScore(attributes).then(scores => {
-      lastScores = scores
-      console.log(lastScores)
       context.state.set('scores', scores);
     });
   },
