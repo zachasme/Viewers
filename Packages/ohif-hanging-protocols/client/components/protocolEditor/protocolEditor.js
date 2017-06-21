@@ -29,7 +29,7 @@ Template.protocolEditor.helpers({
     scores() {
       const instance = Template.instance();
       const lastScores = instance.state.get('scores');
-      const colors = cornerstoneTools.regionsThreshold.getConfiguration().regionColorsRGBs.slice(1);
+      const colors = cornerstoneTools.regionsThreshold.getConfiguration().regionColorsRGB.slice(1);
       const scores = lastScores.map((score, i) => ({
         'score': Math.round(score),
         'color': colors[i],

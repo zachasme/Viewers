@@ -4,7 +4,7 @@
     "build": "cd OHIFViewer && cross-env METEOR_PACKAGE_DIRS=\"../Packages\" meteor build --directory BUILD",
     "install": "cd OHIFViewer && npm install",
     "addupstream": "git remote add upstream https://github.com/OHIF/Viewers",
-    "mergeupstream": "git merge upstream/master"
+    "mergeupstream": "git fetch upstream && git merge upstream/master"
   },
   "devDependencies": {
     "cross-env": "^5.0.1"
