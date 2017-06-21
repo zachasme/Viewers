@@ -67,6 +67,9 @@ export const toolManager = {
         toolManager.addTool('regionsDraw', {
           mouse: cornerstoneTools.regionsDraw
         });
+        toolManager.addTool('regionsUndo', {
+          mouse: cornerstoneTools.regionsUndo
+        });
         
         // CACAL END
         toolManager.addTool('wwwc', {

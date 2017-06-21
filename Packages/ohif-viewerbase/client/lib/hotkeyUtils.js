@@ -110,6 +110,7 @@ Meteor.startup(function() {
         regionsThreshold: 'Perform thresholding',
         regionsDraw: 'Draw regions',
         regionsGrow: 'Grow regions',
+        regionsUndo: 'Undo region',
         wwwc: 'Window W/L',
         zoom: 'Zoom',
         angle: 'Angle Measurement',

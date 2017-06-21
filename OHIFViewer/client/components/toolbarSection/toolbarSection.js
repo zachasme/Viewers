@@ -125,6 +125,13 @@ Template.toolbarSection.helpers({
             svgLink: '/packages/ohif_viewerbase/assets/icons.svg#icon-tools-zoom'
         });
 
+        thresholdingTools.push({
+            id: 'regionsUndo',
+            title: 'Undo Region',
+            classes: 'imageViewerTool',
+            iconClasses: 'fa fa-undo'
+        });
+
         const buttonData = [];
 
         buttonData.push({
