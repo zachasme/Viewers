@@ -30,7 +30,7 @@ Template.protocolEditor.helpers({
           'color': color,
           'derp': true,
           'i': i+1,
-          'score': i === 0 ? 0 : Math.round(lastScores[i-1]),
+          'score': i === 0 ? 0 : lastScores[i-1].toFixed(1),
         }));
       console.log("YO",colors)
       return colors;
