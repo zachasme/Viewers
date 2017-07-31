@@ -70,7 +70,6 @@ Template.protocolEditor.events({
     });
 
     const data = instance._data;
-    console.log(data);
     const attributes = {
       SliceThickness: data.sliceThickness,
       PixelSpacing: data.pixelSpacing.split('\\').map(parseFloat),
@@ -78,7 +77,6 @@ Template.protocolEditor.events({
       RescaleSlope: data.RescaleSlope,
       RescaleIntercept: data.RescaleIntercept,
     };
-    console.log("scoring using these attributes: ", attributes)
 
     cornerstoneTools.regionsScore(attributes).then(scores => {
       context.state.set('scores', scores);
