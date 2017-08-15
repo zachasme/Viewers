@@ -1,13 +1,18 @@
 {
   "scripts": {
     "start": "cd OHIFViewer && cross-env METEOR_PACKAGE_DIRS=\"../Packages\" meteor --settings ../config/orthancDICOMWeb.json",
-    "build": "cd OHIFViewer && cross-env METEOR_PACKAGE_DIRS=\"../Packages\" meteor build --directory ../BUILD",
-    "buildfile": "cd OHIFViewer && cross-env METEOR_PACKAGE_DIRS=\"../Packages\" meteor build ../BUILD",
+    "build": "cd OHIFViewer && cross-env METEOR_PACKAGE_DIRS=\"../Packages\" meteor build ../BUILD",
+    "builduntar": "cd OHIFViewer && cross-env METEOR_PACKAGE_DIRS=\"../Packages\" meteor build --directory ../BUILD",
+    "deploy": "cd Build && tar -xzf OHIFViewer.tar.gz && cd bundle/programs/server && npm install && cd ../..",
+    "rundeployment": "nohup sudo MONGO_URL=mongodb://localhost:27017 ROOT_URL=http://52.57.45.144 PORT=80 nodemon main.js &",
     "install": "cd OHIFViewer && npm install",
     "addupstream": "git remote add upstream https://github.com/OHIF/Viewers",
     "mergeupstream": "git fetch upstream && git merge upstream/master"
   },
   "devDependencies": {
     "cross-env": "^5.0.1"
+  },
+  "dependencies": {
+    "nodemon": "^1.11.0"
   }
 }
