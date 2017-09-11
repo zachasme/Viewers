@@ -9,9 +9,10 @@ import { Viewerbase } from 'meteor/ohif:viewerbase';
 
 
 Template.protocolEditor.onCreated(function(){
+  var config = cornerstoneTools.regionsThreshold.getConfiguration()
   this.state = new ReactiveDict();
   this.state.setDefault({
-    scores: cornerstoneTools.regionsThreshold.getConfiguration().regionColorsRGB.slice(1).map(
+    scores: config.regionColorsRGB.slice(1).map(
       () => (0)
     ),
   })
@@ -32,16 +33,18 @@ Template.protocolEditor.helpers({
           'i': i+1,
           'score': i === 0 ? 0 : lastScores[i-1].toFixed(1),
         }));
-      console.log("YO",colors)
       return colors;
     },
+    KPV() {
+      const instance = Template.instance();
+      return instance.state.get('KPV');
+    }
 });
 
 Template.protocolEditor.events({
   'change #layersAbove':function(event, context) {
     const config = cornerstoneTools.regionsThreshold.getConfiguration();
     config.layersAbove = parseInt(event.target.value);
-    console.log(config);
     cornerstoneTools.regionsThreshold.setConfiguration(config)
   },
   'change #layersBelow':function(event, context) {
@@ -70,7 +73,7 @@ Template.protocolEditor.events({
     });
 
     const data = instance._data;
-    console.log(data)
+    console.log('data', data)
     const attributes = {
       SliceThickness: data.sliceThickness,
       PixelSpacing: data.pixelSpacing.split('\\').map(parseFloat),
@@ -78,6 +81,8 @@ Template.protocolEditor.events({
       RescaleSlope: data.RescaleSlope,
       RescaleIntercept: data.RescaleIntercept,
     };
+
+    context.state.set('KPV', data.KPV)
 
     cornerstoneTools.regionsScore(attributes).then(scores => {
       context.state.set('scores', scores);
