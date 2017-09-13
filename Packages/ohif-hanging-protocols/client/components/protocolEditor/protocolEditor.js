@@ -86,21 +86,13 @@ Template.protocolEditor.events({
     });
 
     const data = instance._data;
-    console.log(data)
-    const attributes = {
-      SliceThickness: data.sliceThickness,
-      PixelSpacing: data.pixelSpacing.split('\\').map(parseFloat),
-      KVP: data.KPV,
-      RescaleSlope: data.RescaleSlope,
-      RescaleIntercept: data.RescaleIntercept,
-    };
 
     context.state.set('ScanPatientName', data.scanPatientName)
     context.state.set('ScanDate', data.scanDate)
     context.state.set('Location', data.scanLocation)
     context.state.set('KPV', data.KPV)
 
-    cornerstoneTools.regionsScore(attributes).then(scores => {
+    cornerstoneTools.regionsScore().then(scores => {
       context.state.set('scores', scores);
     });
   },
