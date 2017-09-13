@@ -10,6 +10,7 @@ import { Viewerbase } from 'meteor/ohif:viewerbase';
 
 Template.protocolEditor.onCreated(function(){
   var config = cornerstoneTools.regionsThreshold.getConfiguration()
+  console.log(this)
   this.state = new ReactiveDict();
   this.state.setDefault({
     scores: config.regionColorsRGB.slice(1).map(
@@ -38,6 +39,18 @@ Template.protocolEditor.helpers({
     KPV() {
       const instance = Template.instance();
       return instance.state.get('KPV');
+    },
+    Location() {
+      const instance = Template.instance();
+      return instance.state.get('Location');
+    },
+    ScanDate() {
+      const instance = Template.instance();
+      return instance.state.get('ScanDate');
+    },
+    ScanPatientName() {
+      const instance = Template.instance();
+      return instance.state.get('ScanPatientName');
     }
 });
 
@@ -73,7 +86,7 @@ Template.protocolEditor.events({
     });
 
     const data = instance._data;
-    console.log('data', data)
+    console.log(data)
     const attributes = {
       SliceThickness: data.sliceThickness,
       PixelSpacing: data.pixelSpacing.split('\\').map(parseFloat),
@@ -82,6 +95,9 @@ Template.protocolEditor.events({
       RescaleIntercept: data.RescaleIntercept,
     };
 
+    context.state.set('ScanPatientName', data.scanPatientName)
+    context.state.set('ScanDate', data.scanDate)
+    context.state.set('Location', data.scanLocation)
     context.state.set('KPV', data.KPV)
 
     cornerstoneTools.regionsScore(attributes).then(scores => {
