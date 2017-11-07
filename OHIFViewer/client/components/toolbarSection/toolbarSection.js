@@ -38,7 +38,7 @@ Template.toolbarSection.helpers({
             options: [{
                 value: 'hangingprotocols',
                 iconClasses: 'fa fa-cog',
-                bottomLabel: 'Hanging'
+                bottomLabel: 'Calcium Tools'
             }]
         };
     },

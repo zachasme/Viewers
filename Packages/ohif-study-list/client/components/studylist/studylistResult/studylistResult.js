@@ -150,36 +150,36 @@ function search() {
     // Clear all current studies
     OHIF.studylist.collections.Studies.remove({});
 
-    Meteor.call('StudyListSearch', filter, (error, studies) => {
-        OHIF.log.info('StudyListSearch');
-        if (error) {
-            OHIF.log.warn(error);
-            return;
-        }
-
-        // Hide loading text
-        Session.set('showLoadingText', false);
-
-        if (!studies) {
-            OHIF.log.warn('No studies found');
-            return;
-        }
-
-        // Loop through all identified studies
-        studies.forEach(study => {
-            // Search the rest of the parameters that aren't done via the server call
-            if (isIndexOf(study.modalities, modality) &&
-                (new Date(studyDateFrom).setHours(0, 0, 0, 0) <= convertStringToStudyDate(study.studyDate) || !studyDateFrom || studyDateFrom === '') &&
-                (convertStringToStudyDate(study.studyDate) <= new Date(studyDateTo).setHours(0, 0, 0, 0) || !studyDateTo || studyDateTo === '')) {
-
-                // Convert numberOfStudyRelatedInstance string into integer
-                study.numberOfStudyRelatedInstances = !isNaN(study.numberOfStudyRelatedInstances) ? parseInt(study.numberOfStudyRelatedInstances) : undefined;
-
-                // Insert any matching studies into the Studies Collection
-                OHIF.studylist.collections.Studies.insert(study);
-            }
-        });
-    });
+    // Meteor.call('StudyListSearch', filter, (error, studies) => {
+    //     OHIF.log.info('StudyListSearch');
+    //     if (error) {
+    //         OHIF.log.warn(error);
+    //         return;
+    //     }
+    //
+    //     // Hide loading text
+    //     Session.set('showLoadingText', false);
+    //
+    //     if (!studies) {
+    //         OHIF.log.warn('No studies found');
+    //         return;
+    //     }
+    //
+    //     // Loop through all identified studies
+    //     studies.forEach(study => {
+    //         // Search the rest of the parameters that aren't done via the server call
+    //         if (isIndexOf(study.modalities, modality) &&
+    //             (new Date(studyDateFrom).setHours(0, 0, 0, 0) <= convertStringToStudyDate(study.studyDate) || !studyDateFrom || studyDateFrom === '') &&
+    //             (convertStringToStudyDate(study.studyDate) <= new Date(studyDateTo).setHours(0, 0, 0, 0) || !studyDateTo || studyDateTo === '')) {
+    //
+    //             // Convert numberOfStudyRelatedInstance string into integer
+    //             study.numberOfStudyRelatedInstances = !isNaN(study.numberOfStudyRelatedInstances) ? parseInt(study.numberOfStudyRelatedInstances) : undefined;
+    //
+    //             // Insert any matching studies into the Studies Collection
+    //             OHIF.studylist.collections.Studies.insert(study);
+    //         }
+    //     });
+    // });
 }
 
 const getRowsPerPage = () => sessionStorage.getItem('rowsPerPage');

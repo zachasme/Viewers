@@ -61,14 +61,23 @@ Template.protocolEditor.events({
     cornerstoneTools.regionsThreshold.setConfiguration(config)
   },
   'change #layersBelow':function(event, context) {
+    console.log("HEEEEEEJ");
     const config = cornerstoneTools.regionsThreshold.getConfiguration();
     config.layersBelow = parseInt(event.target.value);
     cornerstoneTools.regionsThreshold.setConfiguration(config)
   },
   'change input[name="toolRegionValue"]':function(event, context) {
+    console.log("HEjs");
     const config = cornerstoneTools.regionsThreshold.getConfiguration();
     config.toolRegionValue = parseInt(event.target.value);
     cornerstoneTools.regionsThreshold.setConfiguration(config)
+  },
+  'change input[name="calciumThresholdHu"]':function(event, context) {
+    console.log(cornerstoneTools.regionsThreshold);
+    const config = cornerstoneTools.regionsThreshold.getConfiguration();
+    config.calciumThresholdHu = parseInt(event.target.value);
+    cornerstoneTools.regionsThreshold.setConfiguration(config);
+    cornerstoneTools.regionsThreshold.update();
   },
   'click #calculate': function(event, context){
 
