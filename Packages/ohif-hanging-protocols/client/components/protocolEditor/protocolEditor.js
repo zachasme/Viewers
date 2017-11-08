@@ -31,8 +31,9 @@ Template.protocolEditor.helpers({
           'color': color,
           'derp': true,
           'i': i+1,
-          'score': i === 0 ? 0 : lastScores[i-1].toFixed(1),
+          'score': i === 0 ? 'Default color. Select this to erase regions.' : lastScores[i-1].toFixed(1),
         }));
+
       return colors;
     }
 });
@@ -44,19 +45,16 @@ Template.protocolEditor.events({
     cornerstoneTools.regionsThreshold.setConfiguration(config)
   },
   'change #layersBelow':function(event, context) {
-    console.log("HEEEEEEJ");
     const config = cornerstoneTools.regionsThreshold.getConfiguration();
     config.layersBelow = parseInt(event.target.value);
     cornerstoneTools.regionsThreshold.setConfiguration(config)
   },
   'change input[name="toolRegionValue"]':function(event, context) {
-    console.log("HEjs");
     const config = cornerstoneTools.regionsThreshold.getConfiguration();
     config.toolRegionValue = parseInt(event.target.value);
     cornerstoneTools.regionsThreshold.setConfiguration(config)
   },
   'change input[name="calciumThresholdHu"]':function(event, context) {
-    console.log(cornerstoneTools.regionsThreshold);
     const config = cornerstoneTools.regionsThreshold.getConfiguration();
     config.calciumThresholdHu = parseInt(event.target.value);
     cornerstoneTools.regionsThreshold.setConfiguration(config);
