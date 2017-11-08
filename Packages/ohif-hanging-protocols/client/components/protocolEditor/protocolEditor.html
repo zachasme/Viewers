@@ -2,45 +2,33 @@
     <div id='protocolEditor'>
 
       <div>
-              <div>
-                <p>KPV: {{KPV}}</p>
-              </div>
-              <div>
-                <p>Location: {{Location}}</p>
-              </div>
-              <div>
-                <p>Date: {{ScanDate}}</p>
-              </div>
-              <div>
-                <p>Name: {{ScanPatientName}}</p>
-              </div>
-              <div>
-                  <h2>Settings</h2>
-                  <hr/>
-                  <p>
-                      Layers above: <input id='layersAbove' type='number' value='{{config.layersAbove}}' />
-                  </p><p>
-                      Layers below: <input id='layersBelow' type='number' value='{{config.layersBelow}}' />
-                  </p>
-                  <p>Threshold Value (HU): <input name="calciumThresholdHu" type="text" value="{{config.calciumThresholdHu}}"></p>
-              </div>
-                                <hr/>
-              <div>
-                  <h2>Calc-scores <button id="calculate">calculate</button></h2>
-                  <table>
-                    {{#each colors}}
-                      <tr>
-                        <td>
-                          <label>
-                            <input id="color{{i}}" name='toolRegionValue' type='radio' value="{{i}}" checked={{checked}} />
-                          </label>
-                        </td>
-                        <td><label for="color{{i}}"><span class="color" style="background-color:rgb({{color}})"></span></label></td>
-                        <td><p><label for="color{{i}}">{{ score }}</label></p></td>
-                      </tr>
-                    {{/each}}
-                  </table>
-              </div>
+        <div>
+          <h2>Settings</h2>
+          <hr/>
+          <p>
+              Layers above: <input id='layersAbove' type='number' value='{{config.layersAbove}}' />
+          </p><p>
+              Layers below: <input id='layersBelow' type='number' value='{{config.layersBelow}}' />
+          </p>
+          <p>Threshold Value (HU): <input name="calciumThresholdHu" type="text" value="{{config.calciumThresholdHu}}"></p>
+        </div>
+                          <hr/>
+        <div>
+            <h2>Calc-scores <button id="calculate">calculate</button></h2>
+            <table>
+              {{#each colors}}
+                <tr>
+                  <td>
+                    <label>
+                      <input id="color{{i}}" name='toolRegionValue' type='radio' value="{{i}}" checked={{checked}} />
+                    </label>
+                  </td>
+                  <td><label for="color{{i}}"><span class="color" style="background-color:rgb({{color}})"></span></label></td>
+                  <td><p><label for="color{{i}}">{{ score }}</label></p></td>
+                </tr>
+              {{/each}}
+            </table>
+        </div>
       </div>
     </div>
 </template>

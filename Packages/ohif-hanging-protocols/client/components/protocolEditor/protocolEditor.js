@@ -34,53 +34,8 @@ Template.protocolEditor.helpers({
           'score': i === 0 ? 0 : lastScores[i-1].toFixed(1),
         }));
       return colors;
-    },
-    KPV() {
-      const instance = Template.instance();
-      return instance.state.get('KPV');
-    },
-    Location() {
-      const instance = Template.instance();
-      return instance.state.get('Location');
-    },
-    ScanDate() {
-      const instance = Template.instance();
-      return instance.state.get('ScanDate');
-    },
-    ScanPatientName() {
-      const instance = Template.instance();
-      return instance.state.get('ScanPatientName');
     }
 });
-
-Template.protocolEditor.onRendered(function () {
-  // Get study metadata and add to state for display.
-
-  let intervalCount =  0;
-  const intervalId = setInterval(() => {
-    let instance;
-
-    OHIF.viewer.StudyMetadataList.find(studyMetadata => {
-        // Search for the instance that has the current imageId
-        instance = studyMetadata.findInstance(instance => {
-            return true; //instance.getImageId() === imageId;
-        });
-
-        // If instance if found stop the search
-        return Boolean(instance);
-    });
-
-    const data = instance._data;
-
-    this.state.set('ScanPatientName', data.scanPatientName)
-    this.state.set('ScanDate', data.scanDate)
-    this.state.set('Location', data.scanLocation)
-    this.state.set('KPV', data.KPV)
-
-    if (intervalCount >= 1) clearInterval(intervalId);
-    intervalCount++;
-  },1000)
-})
 
 Template.protocolEditor.events({
   'change #layersAbove':function(event, context) {
