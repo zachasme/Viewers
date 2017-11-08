@@ -202,7 +202,6 @@ export class MetadataProvider {
         imageMetadata.instance.imagePositionPatient = imageMetadata.instance.imagePositionPatient || this.getFromDataSet(image.data, 'string', 'x00200032');
         imageMetadata.instance.RescaleSlope = imageMetadata.instance.RescaleSlope || this.getFromDataSet(image.data, 'string', 'x00281053');
         imageMetadata.instance.RescaleIntercept = imageMetadata.instance.RescaleIntercept || this.getFromDataSet(image.data, 'string', 'x00281052');
-        //x00100010
         imageMetadata.instance.scanPatientName = this.getFromDataSet(image.data, 'string', 'x00100010');
         imageMetadata.instance.scanLocation = this.getFromDataSet(image.data, 'string', 'x00080080');
         imageMetadata.instance.scanDate = this.getFromDataSet(image.data, 'string', 'x00080020');

@@ -10,7 +10,6 @@ import { Viewerbase } from 'meteor/ohif:viewerbase';
 
 Template.protocolEditor.onCreated(function(){
   var config = cornerstoneTools.regionsThreshold.getConfiguration()
-  console.log(this)
   this.state = new ReactiveDict();
   this.state.setDefault({
     scores: config.regionColorsRGB.slice(1).map(
@@ -54,6 +53,35 @@ Template.protocolEditor.helpers({
     }
 });
 
+Template.protocolEditor.onRendered(function () {
+  // Get study metadata and add to state for display.
+
+  let intervalCount =  0;
+  const intervalId = setInterval(() => {
+    let instance;
+
+    OHIF.viewer.StudyMetadataList.find(studyMetadata => {
+        // Search for the instance that has the current imageId
+        instance = studyMetadata.findInstance(instance => {
+            return true; //instance.getImageId() === imageId;
+        });
+
+        // If instance if found stop the search
+        return Boolean(instance);
+    });
+
+    const data = instance._data;
+
+    this.state.set('ScanPatientName', data.scanPatientName)
+    this.state.set('ScanDate', data.scanDate)
+    this.state.set('Location', data.scanLocation)
+    this.state.set('KPV', data.KPV)
+
+    if (intervalCount >= 1) clearInterval(intervalId);
+    intervalCount++;
+  },1000)
+})
+
 Template.protocolEditor.events({
   'change #layersAbove':function(event, context) {
     const config = cornerstoneTools.regionsThreshold.getConfiguration();
@@ -80,27 +108,6 @@ Template.protocolEditor.events({
     cornerstoneTools.regionsThreshold.update();
   },
   'click #calculate': function(event, context){
-
-    // Create the object for the instance metadata
-    let instance;
-
-    OHIF.viewer.StudyMetadataList.find(studyMetadata => {
-        // Search for the instance that has the current imageId
-        instance = studyMetadata.findInstance(instance => {
-            return true; //instance.getImageId() === imageId;
-        });
-
-        // If instance if found stop the search
-        return !!instance;
-    });
-
-    const data = instance._data;
-
-    context.state.set('ScanPatientName', data.scanPatientName)
-    context.state.set('ScanDate', data.scanDate)
-    context.state.set('Location', data.scanLocation)
-    context.state.set('KPV', data.KPV)
-
     cornerstoneTools.regionsScore().then(scores => {
       context.state.set('scores', scores);
     });
