@@ -204,6 +204,7 @@ export class MetadataProvider {
         imageMetadata.instance.RescaleIntercept = imageMetadata.instance.RescaleIntercept || this.getFromDataSet(image.data, 'string', 'x00281052');
         imageMetadata.instance.scanPatientName = this.getFromDataSet(image.data, 'string', 'x00100010');
         imageMetadata.instance.scanLocation = this.getFromDataSet(image.data, 'string', 'x00080080');
+        imageMetadata.instance.scanPatientId = this.getFromDataSet(image.data, 'string', 'x00100020'); 
         imageMetadata.instance.scanDate = this.getFromDataSet(image.data, 'string', 'x00080020');
         imageMetadata.instance.KPV = imageMetadata.instance.KPV || this.getFromDataSet(image.data, 'string', 'x00180060');
         imageMetadata.instance.sliceThickness = imageMetadata.instance.sliceThickness || this.getFromDataSet(image.data, 'string', 'x00180050');

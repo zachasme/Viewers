@@ -1,9 +1,38 @@
 import { Template } from 'meteor/templating';
+import { Tracker } from 'meteor/tracker';
 import { Session } from 'meteor/session';
 import { OHIF } from 'meteor/ohif:core';
 import { viewportOverlayUtils } from '../../../lib/viewportOverlayUtils';
 import { getElementIfNotEmpty } from '../../../lib/getElementIfNotEmpty';
 import { getStackDataIfNotEmpty } from '../../../lib/getStackDataIfNotEmpty';
+
+Template.viewportOverlay.onCreated(function() {
+  this.state = new ReactiveDict();
+  this.state.setDefault({
+    metaData: {
+      scanPatientName: '',
+      scanDate: '',
+      scanPatientId: '',
+      scanLocation: ''
+    }
+  })
+
+  const thisInstance = this;
+
+  Tracker.autorun(function () {
+    Session.get('CornerstoneNewImage' + 0);
+    OHIF.viewer.StudyMetadataList.find(studyMetadata => {
+        // Search for the instance that has the current imageId
+        instance = studyMetadata.findInstance(instance => {
+            return true; //instance.getImageId() === imageId;
+        });
+
+        // If instance if found stop the search
+        return Boolean(instance);
+    });
+    thisInstance.state.set('metaData', instance._data);
+  })
+});
 
 Template.viewportOverlay.helpers({
     wwwc() {
@@ -47,14 +76,10 @@ Template.viewportOverlay.helpers({
         return image.width + ' x ' + image.height;
     },
     patientName() {
-        Session.get('CornerstoneNewImage' + this.viewportIndex);
-
-        return viewportOverlayUtils.getPatient.call(this, 'name');
+      return Template.instance().state.get('metaData').scanPatientName;
     },
     patientId() {
-        Session.get('CornerstoneNewImage' + this.viewportIndex);
-
-        return viewportOverlayUtils.getPatient.call(this, 'id');
+      return Template.instance().state.get('metaData').scanPatientId;
     },
     patientBirthDate() {
         Session.get('CornerstoneNewImage' + this.viewportIndex);
@@ -67,9 +92,7 @@ Template.viewportOverlay.helpers({
         return viewportOverlayUtils.getPatient.call(this, 'sex');
     },
     studyDate() {
-        Session.get('CornerstoneNewImage' + this.viewportIndex);
-
-        return viewportOverlayUtils.getStudy.call(this, 'studyDate');
+        return Template.instance().state.get('metaData').scanDate;
     },
     studyTime() {
         Session.get('CornerstoneNewImage' + this.viewportIndex);
@@ -80,6 +103,12 @@ Template.viewportOverlay.helpers({
         Session.get('CornerstoneNewImage' + this.viewportIndex);
 
         return viewportOverlayUtils.getStudy.call(this, 'studyDescription');
+    },
+    scanLocation() {
+      return Template.instance().state.get('metaData').scanLocation;
+    },
+    KPV() {
+      return Template.instance().state.get('metaData').KPV;
     },
     seriesDescription() {
         Session.get('CornerstoneNewImage' + this.viewportIndex);
